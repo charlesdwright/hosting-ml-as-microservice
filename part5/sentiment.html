@@ -5,20 +5,38 @@
       textarea { width: 200px; height: 50px; }
       button { width: 100px; height: 25px; display: block; }
     </style>
+
     <script>
-    var score = function() {
+
+     var score = function() {
       var review = document.getElementById("review").value;
+
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-//             document.getElementById("output").innerHTML += "<div>"+JSON.parse(xhttp.responseText).args.text+"</div>";
-              document.getElementById("output").innerHTML += "<div>"+JSON.parse(xhttp.responseText)+"</div>";
+        if (this.readyState == 4 && this.status == 200) {
+             document.getElementById("output").innerHTML += "<div>"+JSON.parse(xhttp.responseText).args.text+"</div>";
 
           }
       };
-      xhttp.open("GET", "http://3.86.250.49:5000/predict?input="+review, true);
+
+
+      xhttp.open("GET", "http://34.205.89.123:5000/predict?input="+review, true);
+
+      // Track the state changes of the request
+      xhttp.onreadystatechange = function(){
+        // Ready state 4 means the request is done
+        if(xhttp.readyState === 4){
+          // 200 is a successful return
+          if(xhttp.status === 200){
+            alert(xhttp.responseText); // 'This is the returned text.'
+          }else{
+            alert('Error: '+xhttp.status); // An error occurred during the request
+          }
+        }
+      }
       xhttp.send();
     }
+
     </script>
   </head>
   <body>

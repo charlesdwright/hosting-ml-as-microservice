@@ -12,25 +12,26 @@
       var review = document.getElementById("review").value;
 
       var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-             document.getElementById("output").innerHTML += "<div>"+JSON.parse(xhttp.responseText).args.text+"</div>";
+      // xhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //        document.getElementById("output").innerHTML += "<div>"+ xhttp.responseText + "</div>";
+      //
+      //     }
+      // };
 
-          }
-      };
 
-
-      xhttp.open("GET", "http://34.205.89.123:5000/predict?input="+review, true);
+       xhttp.open("GET", "http://3.236.192.70:5000/predict?input="+review, true);
 
       // Track the state changes of the request
       xhttp.onreadystatechange = function(){
         // Ready state 4 means the request is done
         if(xhttp.readyState === 4){
-          // 200 is a successful return
+           //200 is a successful return
           if(xhttp.status === 200){
             alert(xhttp.responseText); // 'This is the returned text.'
+              document.getElementById("output").innerHTML += "<div>"+ xhttp.responseText + "</div>";
           }else{
-            alert('Error: '+xhttp.status); // An error occurred during the request
+            alert('Error: '+xhttp.status + '  '+ xhttp.readyState); // An error occurred during the request
           }
         }
       }
